@@ -63,7 +63,7 @@ public class NaverNewsProvider extends AbstractHttpScraper {
 //            System.out.println("items = " + items);
             String[] itemArr = items.split("},");
             for (String item : itemArr) {
-                System.out.println("item = " + item);
+//                System.out.println("item = " + item);
 //                String title = item
 //                        .split("\"title\":\"")[1] // 0 <-> 1 -> ["title":"]
 //                        .split("\",")[0]; // ",
@@ -92,7 +92,7 @@ public class NaverNewsProvider extends AbstractHttpScraper {
 
     public static void main(String[] args) {
         NewsProvider provider = new NaverNewsProvider();
-        List<NewsResult> results = provider.fetchNews("경우의 수", 10);
+        List<NewsResult> results = provider.fetchNews("프리티걸", 10);
         System.out.println("results = " + results);
     }
 }
