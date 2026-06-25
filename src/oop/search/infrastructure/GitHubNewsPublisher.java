@@ -33,10 +33,10 @@ public class GitHubNewsPublisher extends AbstractHttpClient implements NewsPubli
         sb.append("%s(와)과 관련된 최신 뉴스입니다<br>".formatted(topic));
         for (NewsResult newsResult : newsResults) {
             sb.append("[%s]".formatted(newsResult.title()));
-            sb.append("(%s) `%s`<br> ".formatted(
+            sb.append("(%s) <br> `%s` <br>".formatted(
                     newsResult.url(),
                     newsResult.pubDate()));
-            sb.append("> %s<br><br>".formatted(newsResult.description()));
+            sb.append("<blockquote>%s</blockquote><br><br>".formatted(newsResult.description()));
         }
         String body = sb.toString();
         System.out.println("body = " + body);
