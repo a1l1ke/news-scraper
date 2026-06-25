@@ -40,6 +40,8 @@ public class GitHubNewsPublisher extends AbstractHttpClient implements NewsPubli
             sb.append("> %s".formatted(newsResult.description()));
             sb.append("---");
         }
+        String body = sb.toString();
+        System.out.println("body = " + body);
 
         String payload = """
                 {
@@ -50,8 +52,11 @@ public class GitHubNewsPublisher extends AbstractHttpClient implements NewsPubli
                 // %s -> topic. %s -> 한국기준 현재 시간
                 "%s (%s)".formatted(topic, ZonedDateTime.now(ZoneId.of("Asia/Seoul"))),
 //                newsResults
-                sb.toString()
+                body
         ).trim();
+
+        System.out.println("payload = " + payload);
+        
         HttpRequest request = HttpRequest.newBuilder()
 //                .GET()
                 .POST(HttpRequest.BodyPublishers.ofString(payload, StandardCharsets.UTF_8))
