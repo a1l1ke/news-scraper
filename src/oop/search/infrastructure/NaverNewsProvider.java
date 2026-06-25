@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 public class NaverNewsProvider extends AbstractHttpScraper {
@@ -46,23 +47,36 @@ public class NaverNewsProvider extends AbstractHttpScraper {
                 .header("X-Naver-Client-Id", clientId)
                 .header("X-Naver-Client-Secret", clientSecret)
                 .build();
+
+        List<NewsResult> results = new ArrayList<>();
         try {
             HttpResponse<String> response = httpClient.send(
                     request,
                     HttpResponse.BodyHandlers.ofString()
             );
             String body = response.body();
-            System.out.println("body = " + body);
+//            System.out.println("body = " + body);
+
+            // items
+            String items = body.split("items")[1]; // 0 <-> 1
+            // <- items ->
+//            System.out.println("items = " + items);
+            String[] itemArr = items.split("},");
+            for (String item : itemArr) {
+                System.out.println("item = " + item);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return List.of();
+//        return List.of();
+        return results;
     }
 
     public static void main(String[] args) {
         NewsProvider provider = new NaverNewsProvider();
-        List<NewsResult> results = provider.fetchNews("창억떡", 10);
+        List<NewsResult> results = provider.fetchNews("경우의 수", 10);
         System.out.println("results = " + results);
     }
 }
