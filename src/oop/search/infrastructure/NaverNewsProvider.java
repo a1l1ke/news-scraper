@@ -1,5 +1,6 @@
 package oop.search.infrastructure;
 
+import oop.search.application.NewsProvider;
 import oop.search.domain.NewsCategory;
 import oop.search.domain.NewsResult;
 
@@ -30,5 +31,11 @@ public class NaverNewsProvider extends AbstractHttpScraper {
     @Override
     public List<NewsResult> fetchNews(String searchQuery, int limit) {
         return List.of();
+    }
+
+    public static void main(String[] args) {
+        NewsProvider provider = new NaverNewsProvider();
+        List<NewsResult> results = provider.fetchNews("창억떡", 10);
+        System.out.println("results = " + results);
     }
 }
