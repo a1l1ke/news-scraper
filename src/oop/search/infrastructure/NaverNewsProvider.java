@@ -64,6 +64,16 @@ public class NaverNewsProvider extends AbstractHttpScraper {
             String[] itemArr = items.split("},");
             for (String item : itemArr) {
                 System.out.println("item = " + item);
+//                String title = item
+//                        .split("\"title\":\"")[1] // 0 <-> 1 -> ["title":"]
+//                        .split("\",")[0]; // ",
+                String title = cutText(item, "\"title\":\"", "\",\n");
+                String link = cutText(item, "\"link\":\"", "\",\n");
+                String description = cutText(item, "\"description\":\"", "\",\n");
+                // pubDate는 문자열 ""가 추가적으로 들어갈 염려가 없기 때문에 바로 "로 구분
+                String pubDate = cutText(item, "\"description\":\"", "\"");
+                NewsResult result = new NewsResult(title, description, link, pubDate);
+                results.add(result);
             }
 
         } catch (Exception e) {
@@ -72,6 +82,12 @@ public class NaverNewsProvider extends AbstractHttpScraper {
 
 //        return List.of();
         return results;
+    }
+
+    public String cutText(String original, String prefix, String suffix) {
+        return original
+                .split(prefix)[1]
+                .split(suffix)[0];
     }
 
     public static void main(String[] args) {
