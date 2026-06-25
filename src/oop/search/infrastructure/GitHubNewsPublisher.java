@@ -30,15 +30,13 @@ public class GitHubNewsPublisher extends AbstractHttpClient implements NewsPubli
         String url = endpoint;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("%s(와)과 관련된 최신 뉴스입니다\n".formatted(topic));
-        sb.append("---");
+        sb.append("%s(와)과 관련된 최신 뉴스입니다<br>".formatted(topic));
         for (NewsResult newsResult : newsResults) {
             sb.append("[%s]".formatted(newsResult.title()));
-            sb.append("(%s) `%s`\n".formatted(
+            sb.append("(%s) `%s`<br> ".formatted(
                     newsResult.url(),
                     newsResult.pubDate()));
-            sb.append("> %s".formatted(newsResult.description()));
-            sb.append("---");
+            sb.append("> %s<br><br>".formatted(newsResult.description()));
         }
         String body = sb.toString();
         System.out.println("body = " + body);
@@ -56,7 +54,7 @@ public class GitHubNewsPublisher extends AbstractHttpClient implements NewsPubli
         ).trim();
 
         System.out.println("payload = " + payload);
-        
+
         HttpRequest request = HttpRequest.newBuilder()
 //                .GET()
                 .POST(HttpRequest.BodyPublishers.ofString(payload, StandardCharsets.UTF_8))
