@@ -16,7 +16,7 @@ public class ConsoleNewsApp {
         Scanner sc = new Scanner(System.in);
         while (true) { // 예외처리는 생략
             System.out.println("[검색할 키워드를 입력해주세요 (q 입력 시 종료)]");
-            String keyword = sc.nextLine();
+            String keyword = sc.nextLine().trim(); // 스페이스 문제 제거
             if (keyword.equals("q")) {
                 System.out.println("[검색을 종료합니다]");
                 break;
