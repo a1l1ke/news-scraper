@@ -93,6 +93,9 @@ public class NaverNewsProvider extends AbstractHttpScraper {
     public static void main(String[] args) {
         NewsProvider provider = new NaverNewsProvider();
         List<NewsResult> results = provider.fetchNews("프리티걸", 10);
-        System.out.println("results = " + results);
+//        System.out.println("results = " + results);
+        for (NewsResult newsItem : results) {
+            System.out.println("newsItem = " + newsItem);
+        }
     }
 }
